@@ -106,6 +106,7 @@ export const handleRefreshToken = async (req:Request, res:Response) => {
     const payload = jwt.verify(token, JWT_REFRESH_SECRET);
     // payload.sub -> user id
     const user = await User.findById(payload.sub);
+    // if user not found
     if(!user){
       return res.status(401).json({message:"User not found"});
     }
